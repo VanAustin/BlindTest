@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+      <h1 class="welcome">Bienvenue sur BlindTest, votre nouveau gestionnaire de tâches !</h1>
+                    {% if is_granted('ROLE_USER') %}
+					{% for tasks in task %}
+		<form action="{{ path('new_task', {'id': tasks.id }) }}" method="POST">
+			<input type="hidden" name="id" value="{{ tasks.id }}">{% endfor %}
+				<button class="btn btn-info mb-5 button-filtre"><i aria-hidden="true"> Ajout d'une tâche</i></button>
+		</form>
+<h2 class="task_list">Liste des tâches</h2>
+    <div class="col-md-10">
+            <!-- Liste des taĉhes -->
+                {% for tasks in task %}
+        <ul class="list-group">
+            <li class="list-group-item">
+            <!-- Task undone -->
+                    {% if tasks.status == 'undone' %}
+                <a href="{{ path('task_set_status', { 'id': tasks.id, 'status': 'done' }) }}"><i class="check fa fa-square-o fa-2x" aria-hidden="true"></i></a>
+                    {% else %}
+            <!-- Task done -->
+                <a href="{{ path('task_set_status', { 'id': tasks.id, 'status': 'undone' }) }}"><i class="check fa fa-check-square-o fa-2x" aria-hidden="true"></i></a>
+                    {% endif %}
+            <!-- Title -->
+                <h4 class="{% if tasks.status == 'done' %}done{% endif %}">{{ tasks.title }}</h4>
+                <!-- Delete : on utilise un form + méthode POST pour plus de sécurité et de bonne pratique -->
+                <form action="{{ path('delete_task', {'id': tasks.id }) }}" method="POST" class=" form_modif">
+                    <input type="hidden" name="id" value="{{ tasks.id }}">
+                    <button class="btn btn-link btn-sm"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button>
+                </form>
+            <!-- Edit : on utilise un form + méthode POST pour plus de sécurité et de bonne pratique -->
+                <form action="{{ path('edit_task', {'id': tasks.id }) }}" method="POST" class="form_modif">
+                    <input type="hidden" name="id" value="{{ tasks.id }}">
+                    <button class="btn btn-link btn-sm"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
+                </form>
+            </li>
+            <br>
+                {% endfor %}
+        </ul>
+    </div>
+                    {% else %}
+        <h1><a href="{{ path('fos_user_registration_register') }}">Inscrivez vous</a> et/ou <a href="{{ path('fos_user_security_login') }}">Connectez-vous</a> pour gérer vos tâches</h1>
+                    {% endif %}
+  {{ parent() }}
+{% endblock %}

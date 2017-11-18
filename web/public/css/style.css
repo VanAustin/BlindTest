@@ -1,0 +1,55 @@
+/* Global */
+button {
+  cursor: pointer;
+}
+
+/* Header */
+.white {
+  color: white;
+}
+
+.sub-log-title {
+  display: block;
+  text-align: center;
+  font-style: italic;
+}
+
+.welcome{
+	text-align: center;
+	margin-bottom: 5%;
+}
+.task_list
+{
+	text-align:left;
+	margin-bottom: 5%;
+}
+.form_delete {
+    float: right;
+}
+
+.list-group-item .done {
+    text-decoration: line-through;
+}
+
+.d-flex button{
+	margin-right: 3%;
+}
+.check{
+	float:left;
+	margin-right: 3%;
+}
+.form_modif{
+	float: right;
+	margin-top: 0%;
+}
+.button-filtre{
+	float: right;
+	margin-right: 2%;
+}
+.add{
+	float: left;
+}
+
+.list-group .fa {
+    vertical-align: bottom;
+}

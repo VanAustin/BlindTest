@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Ajouter votre tâche
+{% endblock %}
+
+{% block body %}
+    <h1>Votre tâche :</h1>
+
+    {{ form_start(form, {'action': path('new_task'), 'method': 'POST'}) }}
+        {{ form_label(form.title) }}
+        {{ form_errors(form.title) }}
+        {{ form_widget(form.title) }}
+	<h2>Catégorie</h2>
+        {{ form_widget(form._token) }}
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-info mt-2">Ajouter la tâche</button>
+        </div>
+    {{ form_end(form, {'render_rest': false}) }}
+
+{% endblock %}

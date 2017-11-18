@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Admin des catégories
+{% endblock %}
+
+{% block body %}
+    <h2 class="welcome">Bienvenue à toi grand maitre Admin !</h2>
+    <h3 class="welcome">Gérer les catégories</h3>
+
+    <div class="d-flex flex-wrap justify-content-around">
+            <div class="d-flex justify-content-center">
+                <a class="btn btn-secondary mb-5" href="{{ path('new_tag')}}">Créer une catégorie<br><i class="fa fa-tags mt-2" aria-hidden="true"></i></a>
+            </div>
+    </div>
+
+{% if is_granted('ROLE_ADMIN') %}
+<ul class="list-group">
+	{% for category in categories %}
+<li class="list-group-item">
+	<!-- Title -->
+	<h4><span class="badge badge-info mr-2 mb-2">
+     <p class="text-dark" href="">{{ category.categoryName }}</p></span>
+    </h4>
+	<!-- Delete : on utilise un form + méthode POST pour plus de sécurité et de bonne pratique -->
+		<form action="{{ path('delete_tag', {'id': category.id }) }}" method="post" class=" form_modif">
+			<input type="hidden" name="id" value="{{ category.id }}">
+			<button class="btn btn-link btn-sm"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button>
+		</form>
+	<!-- Edit : on utilise un form + méthode POST pour plus de sécurité et de bonne pratique -->
+		<form action="{{ path('edit_tag', {'id': category.id }) }}" method="post" class="form_modif">
+			<input type="hidden" name="id" value="{{ category.id }}">
+			<button class="btn btn-link btn-sm"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
+		</form>
+	</li>
+	{% endfor %}
+</ul>
+</div>
+{% endif %}
+
+{% endblock %}
