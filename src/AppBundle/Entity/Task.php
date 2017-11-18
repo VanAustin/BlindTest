@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  *@ORM\Entity
  *@ORM\Table(name="task")
+ *@ORM\Entity(repositoryClass="AppBundle\Repository\TaskRepository")
  */
 class Task
 {
@@ -27,6 +28,7 @@ class Task
     * @var string
     *
     * @ORM\Column(name="status", type="string", length=6, options={"default"="undone"})
+    *
     */
     private $status = 'undone';
 
@@ -140,4 +142,5 @@ class Task
     {
         $this->listes->removeElement($liste);
     }
+
 }

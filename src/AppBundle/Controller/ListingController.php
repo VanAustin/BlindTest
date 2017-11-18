@@ -29,12 +29,27 @@ class ListingController extends Controller
     public function homepageAction(UserInterface $user = null, Request $request, EntityManagerInterface $em)
     {
         $task= $user->getTasks();
+        if($request->request->get('done')!==null)
+        {
+            $task = $em->getRepository(Task::class)->getTasksByStatus('done', $user->getId());
+        }
+        if($request->request->get('undone')!==null)
+        {
+            $task = $em->getRepository(Task::class)->getTasksByStatus('undone', $user->getId());
+        }
+        if($request->request->get('all')!==null)
+        {
+            $task= $user->getTasks();
+        }
+
         $liste = $user->getListes();
         $categories = $em->getRepository(Category::class)->findAll();
+
 
         return $this->render('listing/index.html.twig', [
             'task' => $task,
             'liste' => $liste,
+            'user'=> $user,
             'categories'=> $categories,
         ]);
     }
