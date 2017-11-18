@@ -21,4 +21,4 @@ BlindTest
 NB :
 - Si des problèmes d'écriture pendant l'installation à cause du cache de Symfony => `sudo chmod -R 777 var`
 - N'hésitez pas à faire une issue pour quoi que ce soit
-- Si il existe un soucis de DB, elle peut être importée depuis le fichier qui se situe dans web/public/docs
+- S'il existe un soucis de DB, elle peut être importée depuis le fichier qui se situe dans web/public/docs
